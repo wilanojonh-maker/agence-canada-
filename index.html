@@ -23,7 +23,7 @@ input{padding:13px;width:90%;border:1px solid #ccc;border-radius:10px;margin:10p
 <button onclick="participer()">Participer au tirage</button>
 <p class="small">Règlement : 1 participation par personne. Tirage au sort en live WhatsApp. Lot : 1 coaching CV. Agence Canada, Cotonou.</p>
 </div>
-  <div id="partage">
+  <div id="partage" style="display:none">
 <p><b>Étape 1 : Partage d'abord pour débloquer !</b><br>Partage avec 5 contacts pour débloquer le bouton WhatsApp</p>
 <button onclick="partager()">📤 Partager sur WhatsApp ( <span id="compteur">0</span>/5 )</button>
 </div>
@@ -41,15 +41,15 @@ function partager(){
   document.getElementById('compteur').innerText = nb;
   if(nb >= 5){
     document.getElementById('partage').style.display = 'none';
-    document.getElementById('bouton-final').style.display = 'block';
-    alert("Bravo ! Tu as partagé 5 fois. Tu peux maintenant rejoindre sur WhatsApp !");
+document.getElementById('fin').style.display = 'block';
+document.getElementById('bouton-final').style.display = 'block';
   }
 }
 </script>
 <script>
 let questions=["Question 1 sur 4 : Connaissez-vous l'Agence Canada ?","Question 2 sur 4 : Voulez-vous travailler au Canada ?","Question 3 sur 4 : Quel métier vous intéresse le plus ?","Question 4 sur 4 : Avez-vous déjà un passeport ?"];
 let i=0;
-function next(){i++; if(i<4){document.getElementById('q').innerText=questions[i]} else {document.getElementById('jeu').style.display='none';document.getElementById('fin').style.display='block'}}
+function next(){i++; if(i<4){document.getElementById('q').innerText=questions[i]} else {document.getElementById('jeu').style.display='none';document.getElementById('partage').style.display='block'}}
 function participer(){let num=document.getElementById('wa').value; if(!num){alert('Mets ton numéro WhatsApp')} else {window.location.href='https://wa.me/qr/4D7PVMY74IIQE1?s=v?text=Bonjour, je participe au Grand Jeu décroche ton visa Canada. Mon numéro: '+num}}
 </script>
 </body></html>
