@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grand Jeu Agence Canada</title>
+<style>body{font-family:Arial;margin:0;background:#f8f9fa;text-align:center}
+header{background:#D52B1E;color:#fff;padding:20px}
+.card{background:#fff;margin:15px;padding:20px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+button{background:#0B5ED7;color:#fff;border:none;padding:15px;width:100%;margin:8px 0;border-radius:10px;font-size:17px;font-weight:bold}
+input{padding:13px;width:90%;border:1px solid #ccc;border-radius:10px;margin:10px 0}
+.small{font-size:12px;color:#666}</style></head>
+<body>
+<header><h1>🇨🇦 Grand Jeu Agence Canada</h1><p>04/11/2026 - Tirage le 15/11/2026</p></header>
+<div class="card" id="jeu">
+<h2>Félicitations !</h2><p>Répondez aux 4 questions et tentez de gagner <b>1 Coaching CV Canada GRATUIT</b></p>
+<h3 id="q">Question 1 sur 4 : Connaissez-vous l'Agence Canada ?</h3>
+<button onclick="next()">Oui</button>
+<button onclick="next()">Non</button>
+<p class="small">Commentaires 10 / 210 - Jeu gratuit sans obligation d'achat</p>
+</div>
+<div class="card" id="fin" style="display:none">
+<h2>🎉 Bravo, vous êtes qualifié !</h2><p>Laissez votre WhatsApp pour valider votre participation</p>
+<input id="wa" placeholder="Ex: +229 97 00 00 00">
+<button onclick="participer()">Participer au tirage</button>
+<p class="small">Règlement : 1 participation par personne. Tirage au sort en live WhatsApp. Lot : 1 coaching CV. Agence Canada, Cotonou.</p>
+</div>
+<script>
+let questions=["Question 1 sur 4 : Connaissez-vous l'Agence Canada ?","Question 2 sur 4 : Voulez-vous travailler au Canada ?","Question 3 sur 4 : Quel métier vous intéresse le plus ?","Question 4 sur 4 : Avez-vous déjà un passeport ?"];
+let i=0;
+function next(){i++; if(i<4){document.getElementById('q').innerText=questions[i]} else {document.getElementById('jeu').style.display='none';document.getElementById('fin').style.display='block'}}
+function participer(){let num=document.getElementById('wa').value; if(!num){alert('Mets ton numéro WhatsApp')} else {window.location.href='https://wa.me/22997000000?text=Bonjour, je participe au Grand Jeu Agence Canada. Mon numéro: '+num}}
+</script>
+</body></html>
