@@ -36,15 +36,26 @@ input{padding:13px;width:90%;border:1px solid #ccc;border-radius:10px;margin:10p
 
 <script>
 let nb = 0;
-function partager(){
-  let texte = "Grand Jeu Decroche ton visa Canada ! Moi j ai deja participe, tente ta chance aussi : https://bit.ly/decrochetonvisacanada";
-window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(texte), "_blank");
+async function partager(){
+  let texte = "Grand Jeu Decroche ton visa Canada ! Joue et tente de gagner 1 Coaching CV Canada GRATUIT 👇 https://jonh-maker.github.io/agence-canada-/";
+  try{
+    let reponse = await fetch('affiche.jpg');
+    let blob = await reponse.blob();
+    let fichier = new File([blob], 'affiche.jpg', {type: 'image/jpeg'});
+    if(navigator.canShare && navigator.canShare({files:[fichier]})){
+      await navigator.share({text: texte, files:[fichier]});
+    } else {
+      window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(texte), "_blank");
+    }
+  } catch(e){
+    window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(texte), "_blank");
+  }
   nb++;
-  document.getElementById('compteur').innerText = nb;
+  document.getElementById('compteur').innerHTML = nb + "/5 partages";
   if(nb >= 5){
-    document.getElementById('partage').style.display = 'none';
-document.getElementById('fin').style.display = 'block';
-document.getElementById('bouton-final').style.display = 'block';
+    document.getElementById('partage').style.display = "none";
+    document.getElementById('fin').style.display = "block";
+    document.getElementById('bouton-final').style.display = "block";
   }
 }
 </script>
