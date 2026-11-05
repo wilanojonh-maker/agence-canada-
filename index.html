@@ -1,68 +1,87 @@
 <!DOCTYPE html>
-<html lang="fr"><head><meta charset="UTF-8">
-  <meta property="og:title" content="Grand Jeu Decroche ton visa Canada !">
-<meta property="og:description" content="Reponds aux 4 questions et tente de gagner 1 Coaching CV Canada GRATUIT ! Tirage le 15/11/2026">
-<meta property="og:url" content="https://wilanojonh.github.io/agence-canada-/">
-<meta property="og:image" content="https://raw.githubusercontent.com/wilanojonh/agence-canada-/principal/affiche.jpg">
-<style>body{font-family:Arial;margin:0;background:linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('fond.jpg');text-align:center}
-header{background:linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('fond.jpg');color:#fff;padding:20px}
-.card{background:#fff;margin:15px;padding:20px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
-button{background:#0B5ED7;color:#fff;border:none;padding:15px;width:100%;margin:8px 0;border-radius:10px;font-size:17px;font-weight:bold}
-input{padding:13px;width:90%;border:1px solid #ccc;border-radius:10px;margin:10px 0}
-.small{font-size:12px;color:#666}</style></head>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grand Jeu Decroche ton visa Canada !</title>
+<meta property="og:title" content="Grand Jeu Decroche ton visa Canada !">
+<meta property="og:description" content="Reponds aux 4 questions et tente de gagner 1 Coaching CV Canada GRATUIT - Tirage le 15/11/2026">
+<meta property="og:url" content="https://bit.ly/decrochetonvisacanada">
+<meta property="og:image" content="https://wilanojonh.github.io/agence-canada-/affiche.jpg">
+<style>
+body{font-family:Arial;margin:0;background:#f2f2f2;text-align:center}
+.header{background:linear-gradient(#d00,#a00);color:#fff;padding:20px}
+.card{background:#fff;margin:15px;padding:20px;border-radius:15px}
+button{background:#d00;color:#fff;border:none;padding:15px 20px;border-radius:10px;font-size:17px;font-weight:bold;width:100%;margin-top:10px}
+input{width:100%;padding:15px;border:1px solid #ccc;border-radius:10px;margin-top:10px;font-size:16px}
+.btn-whatsapp{background:#25D366}
+</style>
+</head>
 <body>
-<header><h1>🇨🇦 Grand Jeu Decroche ton visa Canada</h1><p>04/11/2026 - Tirage le 15/11/2026</p></header>
-<div class="card" id="jeu">
-<h2>Félicitations !</h2><p>Répondez aux 4 questions et tentez de gagner <b>1 Coaching CV Canada GRATUIT</b></p>
-<h3 id="q">Question 1 sur 4 : Connaissez-vous l'Agence Canada ?</h3>
-<button onclick="next()">Oui</button>
-<button onclick="next()">Non</button>
-<p class="small">Commentaires 10 / 210 - Jeu gratuit sans obligation d'achat</p>
-</div>
-<div class="card" id="fin" style="display:none">
-<h2>🎉 Bravo, vous êtes qualifié !</h2><p>Laissez votre WhatsApp pour valider votre participation</p>
-<input id="wa" placeholder="Ex: +229 97 00 00 01">
-<button onclick="participer()">Participer au tirage</button>
-<p class="small">Règlement : 1 participation par personne. Tirage au sort en live WhatsApp. Lot : 1 coaching CV. Agence Canada, Afrique.</p>
-</div>
-  <div id="partage" style="display:none">
-<p><b>Étape 1 : Partage d'abord pour débloquer !</b><br>Partage avec 5 contacts pour débloquer le bouton WhatsApp</p>
-<button onclick="partager()">📤 Partager sur WhatsApp ( <span id="compteur">0</span>/5 )</button>
+
+<div class="header">
+<h2>Grand Jeu Decroche ton visa Canada !</h2>
+<p>Tirage le 15/11/2026</p>
 </div>
 
-<div id="bouton-final" style="display:none">
-<a href="https://wa.me/qr/4D7PVMY74IIQE1?s=v"><button>✅ Rejoindre sur WhatsApp</button></a>
+<div class="card" id="jeu">
+<h3>Reponds aux 4 questions et tente de gagner <b>1 Coaching CV Canada GRATUIT</b></h3>
+<p id="question">Question 1 sur 4 : Connaissez-vous l'Agence Canada ?</p>
+<button onclick="repondre('Oui')">Oui</button>
+<button onclick="repondre('Non')">Non</button>
+<p>Commentaires 10 / 210 - Jeu gratuit sans obligation d'achat</p>
+</div>
+
+<div class="card" id="fin" style="display:none">
+<h3>Felicitations !</h3>
+<p>Tu es qualifie ! Tu dois partager avec 5 contacts pour valider ta participation.</p>
+<p>Partage : <span id="compteur">0</span> / 5 partages</p>
+<button onclick="partager()">Partager sur WhatsApp</button>
+<div id="bouton-final" style="display:none;margin-top:15px">
+<p>Entre ton WhatsApp pour valider ta participation :</p>
+<input type="tel" id="wa" placeholder="+229 97 00 00 00">
+<button onclick="valider()">Participer au tirage</button>
+</div>
 </div>
 
 <script>
+let questions = [
+"Question 1 sur 4 : Connaissez-vous l'Agence Canada ?",
+"Question 2 sur 4 : Voulez-vous travailler au Canada ?",
+"Question 3 sur 4 : Avez-vous un passeport ?",
+"Question 4 sur 4 : Voulez-vous participer au tirage ?"
+];
+let index = 0;
 let nb = 0;
-async function partager(){
-  let texte = "Grand Jeu Decroche ton visa Canada ! Joue et tente de gagner 1 Coaching CV Canada GRATUIT 👇 https://bit.ly/decrochetonvisacanada-/";
-  try{
-    let reponse = await fetch('affiche.jpg');
-    let blob = await reponse.blob();
-    let fichier = new File([blob], 'affiche.jpg', {type: 'image/jpeg'});
-    if(navigator.canShare && navigator.canShare({files:[fichier]})){
-      await navigator.share({text: texte, files:[fichier]});
-    } else {
-      window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(texte), "_blank");
-    }
-  } catch(e){
-    window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(texte), "_blank");
-  }
-  nb++;
-  document.getElementById('compteur').innerHTML = nb + "/5 partages";
-  if(nb >= 5){
-    document.getElementById('partage').style.display = "none";
+
+function repondre(rep){
+  index++;
+  if(index < questions.length){
+    document.getElementById('question').innerText = questions[index];
+  } else {
+    document.getElementById('jeu').style.display = "none";
     document.getElementById('fin').style.display = "block";
+  }
+}
+
+function partager(){
+  let texte = "Grand Jeu Decroche ton visa Canada ! Joue et tente de gagner 1 Coaching CV Canada GRATUIT 👇 https://bit.ly/decrochetonvisacanada";
+  window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(texte), "_blank");
+  nb++;
+  document.getElementById('compteur').innerText = nb + " / 5 partages";
+  if(nb >= 5){
     document.getElementById('bouton-final').style.display = "block";
   }
 }
+
+function valider(){
+  let num = document.getElementById('wa').value;
+  if(!num){ alert("Mets ton numero WhatsApp"); return; }
+  window.location.href = "https://wa.me/22997974103?text=" + encodeURIComponent("Bonjour CANAFRIK-AGENCY, j'ai participe au jeu. Mon numero : " + num);
+}
 </script>
-<script>
-let questions=["Question 1 sur 4 : Connaissez-vous l'Agence Canada ?","Question 2 sur 4 : Voulez-vous travailler au Canada ?","Question 3 sur 4 : Quel métier vous intéresse le plus ?","Question 4 sur 4 : Avez-vous déjà un passeport ?"];
-let i=0;
-function next(){i++; if(i<4){document.getElementById('q').innerText=questions[i]} else {document.getElementById('jeu').style.display='none';document.getElementById('partage').style.display='block'}}
-function participer(){let num=document.getElementById('wa').value; if(!num){alert('Mets ton numéro WhatsApp')} else {window.location.href='https://wa.me/qr/4D7PVMY74IIQE1?s=v?text=Bonjour, je participe au Grand Jeu décroche ton visa Canada. Mon numéro: '+num}}
-</script>
-</body></html>
+
+<p style="font-size:12px;color:#666">Reglement : 1 participation par personne. Tirage au sort en live. Lot : 1 coaching CV. Agence Canada, Afrique.</p>
+
+</body>
+</html>
