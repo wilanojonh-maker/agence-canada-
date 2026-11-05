@@ -64,15 +64,26 @@ function repondre(rep){
   }
 }
 
-function partager(){
-  let texte = "Grand Jeu Decroche ton visa Canada ! Joue et tente de gagner 1 Coaching CV Canada GRATUIT 👇 https://bit.ly/decrochetonvisacanada";
-  window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(texte), "_blank");
+  async function partager(){
+  let texte = "🔥 J'ai joué au Grand Jeu DECROCHE TON VISA CANADA 🇨🇦 ! Toi aussi tente ta chance pour gagner Coaching CV Canada GRATUIT ! 👉 https://bit.ly/decrochetonvisacanada";
+  try{
+    let reponse = await fetch('affiche.jpg');
+    let blob = await reponse.blob();
+    let fichier = new File([blob], "affiche.jpg", {type:"image/jpeg"});
+    if(navigator.canShare && navigator.canShare({files:[fichier]})){
+      await navigator.share({text: texte, files:[fichier]});
+    } else {
+      window.open("https://wa.me/?text=" + encodeURIComponent(texte));
+    }
+  } catch(e){
+    window.open("https://wa.me/?text=" + encodeURIComponent(texte));
+  }
   nb++;
   document.getElementById('compteur').innerText = nb + " / 5 partages";
   if(nb >= 5){
     document.getElementById('bouton-final').style.display = "block";
   }
-}
+  }
 
 function valider(){
   let num = document.getElementById('wa').value;
